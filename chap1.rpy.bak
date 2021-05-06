@@ -1,0 +1,118 @@
+#Chapter 1 and introduction
+
+#Access script with character dialogue for chapter 1
+
+# Import json file with chapter 1 dialogue
+init python:
+    import json
+
+    dial = json.load(renpy.file("chap1_dial.json"))
+
+## INTRO AND FIRST ROOM SCENE
+label chap1_crime:
+    scene crime
+    # Intro scene with 1st murder
+    news_reporter"[dial[dial][nr]]"
+    news_reporter"[dial[dial][nr-2]]"
+
+    #Scence changes to the main characters room.
+    show room with fade
+    show alex
+
+
+    alex "[dial[dial][alex]]"
+
+    #Call getName to get the players name
+    call getName
+    $temp = "Nice to meet you, " + persistent.g_name + dial["dial"]["alex-2"]
+    alex"[temp]"
+    alex"[dial[dial][alex-3]]"
+    jump hs
+    return
+
+## HIGH SCHOOL SCENE
+label hs:
+    show classroom with fade
+    show alex
+
+    ## ADD SCENE OF BEST FRIEND (HAILEY) tapping should of ALEX ##
+    hailey"[dial[dial][hailey]]"
+    ## CHANGE EMOTION OF HAILEY SMIRKING ABOUT THE MURDER ##
+    hailey"[dial[dial][hailey-1]]"
+    ## CHANGE EMOTION OF ALEX UNEMOTIONAL SILENCE ##
+    hailey"[dial[dial][hailey-2]]"
+    ## ALEX SUPRISED ##
+    alex"[dial[dial][alex-4]]"
+    ## HAILEY UPSET ##
+    hailey"[dial[dial][hailey-3]]"
+    hailey"[dial[dial][hailey-4]]"
+    ## SHOW ALEX NO EMOTION ##
+
+    ## SHOW ALEX THINKING
+    #alex"[dial[dial][alex-9]]"
+    ## MENU
+    menu:
+        alex"[dial[dial][alex-9]]"
+        "Yes.":
+            ## SHOW ALEX HANDS IN POCKET
+            alex"[dial[dial][alex-5]]"
+            ## SHOW HAILEY EXCITED
+            hailey"[dial[dial][hailey-6]]"
+        "No.":
+            ## SHOW ALEX HANDS IN POCKER
+            alex"[dial[dial][alex-7]]"
+            ## SHOW HAILEY SMIRKING
+            hailey"[dial[dial][alex-7]]"
+            ## SHOW ALEX EMOTIONLESS
+            alex"[dial[dial][alex-8]]"
+            ## SHOW HAILEY EXCITED
+            hailey"[dial[dial][hailey-6]]"
+
+    ## BACK AT CRIME SCENE BODY ON FLOOR
+    ## ALEX WORRIED
+    alex"[dial[dial][alex-10]]"
+    ## SHOW HAILEY EXCITED
+    hailey"[dial[dial][hailey-8]]"
+    ## SHOW BROKEN BOTTLE GLASS WITH BLOOD
+    alex"[dial[dial][alex-11]]"
+    hailey"[dial[dial][hailey-9]]"
+    ## SHOW ALEX MAD
+    alex"[dial[dial][alex-12]]"
+    hailey"[dial[dial][hailey-10]]"
+    ## SHOW SCENE WITH COP CARS DRIVING TOWARDS THE SCENE
+    alex"[dial[dial][alex-13]]"
+    ## MENU
+    menu:
+        "RUN!":
+            hailey"[dial[dial][hailey-11]]"
+        "HIDE!":
+            alex"[dial[dial][alex-13]]"
+            hailey"[dial[dial][hailey-11]]"
+
+    ## CRIME SCENE WITH ALEX WORRIED
+    ## SCENE ENDS HERE
+    alex"[dial[dial][alex-15]]"
+
+    jump hallway
+    return
+
+## BACK TO SCHOOL SETTING. SHOW ALEX AND HAILEY IN THE HALLWAY
+label hallway:
+    #Show alex with hailey
+    alex"[dial[dial][alex-16]]"
+    hailey"[dial[dial][hailey-11]]"
+    hailey"[dial[dial][hailey-12]]"
+    #Remove hailey from the scene
+    alex"[dial[dial][alex-17]]"
+    jump chap2_lib
+    return
+
+# getName asks for the players name
+label getName:
+    #Assign the players name
+    $persistent.g_name = renpy.input("My first name is:", default=" ", allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-", length=10)
+
+    #If the player does not input a name then their name will be assigned
+    if persistent.g_name == " ":
+        $ persistent.g_name= "Player"
+    return
