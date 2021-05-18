@@ -257,5 +257,5 @@ label ending_:
     scene reporter with fade
     news_reporter"[dial5[dial][nr-2]]"
     news_reporter"[dial5[dial][nr-3]]"
-    scene end with Pause(4.0)
+    scene end with Pause(7.0)
     return

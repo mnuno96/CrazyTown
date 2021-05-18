@@ -528,6 +528,7 @@ style game_menu_label:
 style game_menu_label_text:
     size gui.title_text_size
     color gui.accent_color
+    #color "#5e1100"
     yalign 0.5
 
 style return_button:
@@ -691,6 +692,7 @@ style page_label_text:
     text_align 0.5
     layout "subtitle"
     hover_color gui.hover_color
+    #color "#5e1100"
 
 style page_button:
     properties gui.button_properties("page_button")
